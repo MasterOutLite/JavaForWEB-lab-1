@@ -1,0 +1,35 @@
+<!-- applicationContext.xml -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dog" class="com.example.laba1.Dog">
+        <property name="nameAnimal" value="Hello my dog"/>
+    </bean>
+
+    <bean id="cat" class="com.example.laba1.Cat">
+        <property name="nameAnimal" value="Hello my cat"/>
+    </bean>
+
+    <bean id="catFood" class="com.example.laba1.CatFood">
+        <property name="cat" ref="cat"/>
+        <property name="amountFood" value="0"/>
+        <property name="nameCatFood" value="Cat Food Much"/>
+
+    </bean>
+
+    <bean id="rat" class="com.example.laba1.Rat">
+        <property name="nameAnimal" value="Hello my rat"/>
+    </bean>
+
+    <bean id="home" class="com.example.laba1.Home">
+        <property name="catFood" ref="catFood"/>
+        <property name="dog" ref="dog"/>
+        <property name="rat" ref="rat"/>
+        <property name="countCat" value="${countAnimal}"/>
+        <property name="countDog" value="0"/>
+        <property name="countRat" value="0"/>
+        <constructor-arg value="0"/>
+    </bean>
+
+</beans>
