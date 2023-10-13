@@ -1,24 +1,46 @@
 package com.example.laba1;
 
-import lombok.AllArgsConstructor;
+import jakarta.annotation.PreDestroy;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Component
 public class Home {
-
-    public Home(Integer countAll) {
-        this.countCat = countAll;
-        this.countDog = countAll;
-        this.countRat = countAll;
+    @Autowired
+    private void setDog(Dog dog){
+        System.out.println("SetDog inside class Home. Autowired.");
+        this.dog = dog;
     }
 
-    private Dog dog;
-    private Integer countDog;
+    @Autowired
     private CatFood catFood;
-    private Integer countCat;
+    private Dog dog;
     private Rat rat;
-    private Integer countRat;
+    @Autowired
+    @Qualifier("dog")
+    private MainBean been;
+
+    @Value("${countAnimal}")
+    Integer count;
+    @PreDestroy
+    private void destroy(){
+        System.out.println(count);
+    }
+    @Autowired
+    private void setMainBeen(@Qualifier("dog") MainBean been){
+        System.out.println("Set mainBeen with qualifier. Benn is: dog.");
+    }
 }
+
+
+//    public Home() {
+//        //Dog dog, CatFood cat, Rat rat
+//        this.dog = dog;
+//        this.rat = rat;
+//        this.catFood = cat;
+//    }
+
